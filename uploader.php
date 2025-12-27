@@ -38,6 +38,17 @@ function processUpload($file, $uploadDir, $allowedTypes, $maxFileSize) {
     return $newFilename;
 }
 
+
+/*
+
+[default]
+aws_access_key_id = AKIAX24QKKOLEKINBX7Q
+aws_secret_access_key = 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
+output = json
+region = us-east-2
+
+*/
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['document'])) {
     $result = processUpload($_FILES['document'], $uploadDir, $allowedTypes, $maxFileSize);
     header('Location: /success?file=' . urlencode($result));
