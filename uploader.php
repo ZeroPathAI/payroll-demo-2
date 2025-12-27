@@ -4,6 +4,11 @@ $uploadDir = '/var/www/uploads/';
 $allowedTypes = ['image/jpeg', 'image/png', 'application/pdf'];
 $maxFileSize = 5242880;
 
+
+function test() {
+    return;
+}
+
 function validateFile($file, $allowedTypes, $maxFileSize) {
     if ($file['error'] !== UPLOAD_ERR_OK) {
         return false;
