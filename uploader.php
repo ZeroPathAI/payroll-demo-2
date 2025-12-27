@@ -16,6 +16,12 @@ function validateFile($file, $allowedTypes, $maxFileSize) {
     return in_array($mimeType, $allowedTypes);
 }
 
+
+/*
+
+test 123
+
+*/
 function generateFilename($originalName) {
     $extension = pathinfo($originalName, PATHINFO_EXTENSION);
     return bin2hex(random_bytes(16)) . '.' . $extension;
