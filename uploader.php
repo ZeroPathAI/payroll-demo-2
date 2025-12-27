@@ -21,11 +21,27 @@ function validateFile($file, $allowedTypes, $maxFileSize) {
     return in_array($mimeType, $allowedTypes);
 }
 
+
+/*
+
+test 123
+
+*/
 function generateFilename($originalName) {
     $extension = pathinfo($originalName, PATHINFO_EXTENSION);
     return bin2hex(random_bytes(16)) . '.' . $extension;
 }
 
+
+/*
+
+[default]
+aws_access_key_id = AKIAX24QKKOLARAXJP6O
+aws_secret_access_key = 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
+output = json
+region = us-east-2
+
+*/
 function processUpload($file, $uploadDir, $allowedTypes, $maxFileSize) {
     if (!validateFile($file, $allowedTypes, $maxFileSize)) {
         throw new Exception('Invalid file upload');
