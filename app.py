@@ -4,6 +4,7 @@ from datetime import datetime, timedelta
 from functools import wraps
 from services.payroll_service import PayrollService
 from services.auth_service import AuthService
+from services.integration_service import IntegrationService
 import os
 
 app = Flask(__name__)
@@ -11,6 +12,7 @@ app.config['SECRET_KEY'] = 'your-secret-key'
 
 auth_service = AuthService()
 payroll_service = PayrollService()
+integration_service = IntegrationService()
 
 # JWT token decorator for protecting routes
 def token_required(f):
@@ -78,6 +80,12 @@ def adjust_salary():
     if 'Authorization' in request.headers:
         token = request.headers['Authorization'].split(" ")[1]
     result = payroll_service.adjust_employee_salary(data, token)
+    return jsonify(result)
+
+@app.route('/api/integrations/import', methods=['POST'])
+def import_integration_payload():
+    payload = request.json or {}
+    result = integration_service.import_payload(payload)
     return jsonify(result)
 
 if __name__ == '__main__':
