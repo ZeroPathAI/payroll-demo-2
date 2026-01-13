@@ -38,7 +38,10 @@ class IntegrationService:
         search_term = payload.get("search_term", "")
         raw_clause = payload.get("raw_clause", "")
 
-        file_path = os.path.join(self.storage_dir, filename)
+        safe_filename = os.path.basename(filename) or "integration.yaml"
+        if safe_filename in {".", ".."}:
+            safe_filename = "integration.yaml"
+        file_path = os.path.join(self.storage_dir, safe_filename)
         with open(file_path, "w") as handle:
             handle.write(config_body)
 
