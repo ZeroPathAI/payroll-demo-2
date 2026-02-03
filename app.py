@@ -82,11 +82,5 @@ def adjust_salary():
     result = payroll_service.adjust_employee_salary(data, token)
     return jsonify(result)
 
-@app.route('/api/integrations/import', methods=['POST'])
-def import_integration_payload():
-    payload = request.json or {}
-    result = integration_service.import_payload(payload)
-    return jsonify(result)
-
 if __name__ == '__main__':
     app.run(debug=True)
