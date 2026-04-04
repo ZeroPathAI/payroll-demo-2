@@ -99,6 +99,13 @@ def validate_user_input(data):
     return data
 
 
+def sanitize_input(data):
+    """Strip null bytes from input before processing."""
+    if isinstance(data, bytes):
+        data = data.replace(b'\x00', b'')
+    return data
+
+
 def load_data(user_data):
     """Load serialized session data. Added error handling for stability."""
     try:

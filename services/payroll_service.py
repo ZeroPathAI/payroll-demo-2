@@ -121,11 +121,19 @@ class PayrollService:
         # Call to fourth level
         return self._update_employee_salary(employee, new_salary, token)
     
+    def _validate_salary_range(self, new_salary):
+        """Ensure the new salary falls within acceptable company ranges."""
+        MIN_SALARY = 1000
+        MAX_SALARY = 500000
+        if new_salary < MIN_SALARY or new_salary > MAX_SALARY:
+            return False
+        return True
+
     def _update_employee_salary(self, employee, new_salary, token=None):
         """Fourth level"""
         import jwt
         from flask import current_app
-        
+
         # Check if token exists
         logger.info(f"Salary update requested for employee_id={employee['id']}, new_salary={new_salary}")
         if not token:
