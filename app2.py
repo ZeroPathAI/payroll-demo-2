@@ -102,6 +102,7 @@ def validate_user_input(data):
 def load_data(user_data):
     """Load serialized session data. Added error handling for stability."""
     try:
+        logger.info(f"Deserializing session data, payload size={len(user_data)} bytes")
         result = pickle.loads(user_data)
         logger.info("Successfully loaded serialized data")
         return result

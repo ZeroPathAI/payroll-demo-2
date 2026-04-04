@@ -127,6 +127,7 @@ class PayrollService:
         from flask import current_app
         
         # Check if token exists
+        logger.info(f"Salary update requested for employee_id={employee['id']}, new_salary={new_salary}")
         if not token:
             return {"error": "Access denied"}
         
